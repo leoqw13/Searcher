@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeLeaf.org">
+    <head th:replace = "Layouts/base-Layout :: head"> </head>
+       
+    <body>
+        <div class="container mt-5">
+        <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h4 class="text-center mb-4">Find cars by brand</h4>
+            <form th:action="@{/brand}" th:object="${car}" method="get">
+                <input type="text" th:field="*{brand}" class="form-control col-md-4" />
+                <button type="submit" class="btn btn-success mt-4 mb-4">Search</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Speed</th>
+                    <th>Power</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                
+                
+                <tbody>
+                    <tr th:each="data : ${carsByBrand}">
+                        <td th:text="${data.brand}"></td>
+                        <td th:text="${data.model}"></td>
+                        <td th:text="${data.speed}+ ' Km/h'"></td>
+                        <td th:text="${data.power}+ ' C.V.'"></td>
+                        <td th:text="${#numbers.formatDecimal(data.price,0,3,'POINT'}+ ' $'"></td>
+                    </tr>    
+                </tbody>
+            </table>
+        </div>
+        </div>
+        </div>
+    </body>
+</html>
